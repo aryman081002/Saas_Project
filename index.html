@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFlow - Modern SaaS Platform for Agencies</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">TechFlow</div>
+            <ul class="nav-menu">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#docs">Documentation</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span class="sun-icon">☀️</span>
+                <span class="moon-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Enterprise SaaS Platform for Modern Agencies
+            </h1>
+            <p class="hero-subtitle">
+                Streamline workflows, showcase real-time data, and build trust with your clients. Built for performance.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Start Free Trial</button>
+                <button class="btn btn-secondary">Schedule Demo</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Active Agencies</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Uptime SLA</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Support</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="product-preview">
+                <div class="preview-card">
+                    <div class="preview-header">📊 Real-Time Dashboard</div>
+                    <div class="preview-chart">
+                        <svg viewBox="0 0 200 120" style="width: 100%; height: 100%; margin-top: -10px;">
+                            <defs>
+                                <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#635BFF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00E5E5;stop-opacity:0.2" />
+                                </linearGradient>
+                            </defs>
+                            <polygon points="0,100 0,50 30,40 60,60 90,30 120,45 150,20 180,35 200,25 200,100" fill="url(#chartGrad)"/>
+                            <polyline points="0,50 30,40 60,60 90,30 120,45 150,20 180,35 200,25" fill="none" stroke="#635BFF" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+                            <circle cx="30" cy="40" r="3" fill="#635BFF"/>
+                            <circle cx="90" cy="30" r="3" fill="#635BFF"/>
+                            <circle cx="150" cy="20" r="3" fill="#635BFF"/>
+                        </svg>
+                    </div>
+                    <div class="preview-bars">
+                        <div class="bar" style="--height: 80%"></div>
+                        <div class="bar" style="--height: 65%"></div>
+                        <div class="bar" style="--height: 90%"></div>
+                        <div class="bar" style="--height: 75%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <h3>Trusted by Industry Leaders</h3>
+        <div class="logo-marquee">
+            <div class="marquee-content">
+                <div class="logo-item">TechCorp</div>
+                <div class="logo-item">DataFlow</div>
+                <div class="logo-item">CloudSync</div>
+                <div class="logo-item">DevStats</div>
+                <div class="logo-item">APIHub</div>
+                <div class="logo-item">TechCorp</div>
+                <div class="logo-item">DataFlow</div>
+                <div class="logo-item">CloudSync</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="problem-solution">
+        <div class="ps-container">
+            <div class="ps-card problem">
+                <h3>❌ The Agency Challenge</h3>
+                <ul>
+                    <li>Clients don't trust your reliability</li>
+                    <li>Complex workflows are hard to explain</li>
+                    <li>Slow websites hurt conversions</li>
+                    <li>Security compliance is unclear</li>
+                    <li>Scattered reporting systems</li>
+                </ul>
+            </div>
+            <div class="ps-divider">→</div>
+            <div class="ps-card solution">
+                <h3>✅ Our Solution</h3>
+                <ul>
+                    <li>Real-time performance dashboards</li>
+                    <li>Intuitive workflow visualization</li>
+                    <li>Optimized Core Web Vitals</li>
+                    <li>SOC2 & GDPR certified</li>
+                    <li>Unified client reporting</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Grid Features -->
+    <section id="features" class="features">
+        <h2>Powerful Features Built for Scale</h2>
+        <div class="bento-grid">
+            <div class="bento-item bento-large">
+                <div class="bento-icon">📊</div>
+                <h3>Real-Time Analytics Dashboard</h3>
+                <p>Track client performance metrics in real-time with customizable dashboards and automated reporting.</p>
+                <div class="feature-demo-chart">
+                    <svg viewBox="0 0 300 150" style="width: 100%; height: 100%;">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#635BFF;stop-opacity:0.6" />
+                                <stop offset="100%" style="stop-color:#635BFF;stop-opacity:0.1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="20" y="80" width="40" height="50" fill="url(#grad1)"/>
+                        <rect x="80" y="40" width="40" height="90" fill="url(#grad1)" opacity="0.8"/>
+                        <rect x="140" y="20" width="40" height="110" fill="url(#grad1)"/>
+                        <rect x="200" y="60" width="40" height="70" fill="url(#grad1)" opacity="0.7"/>
+                        <circle cx="40" cy="75" r="3" fill="#00E5E5"/>
+                        <circle cx="100" cy="35" r="3" fill="#00E5E5"/>
+                        <circle cx="160" cy="15" r="3" fill="#00E5E5"/>
+                        <circle cx="220" cy="55" r="3" fill="#00E5E5"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="bento-item">
+                <div class="bento-icon">🔐</div>
+                <h3>Enterprise Security</h3>
+                <p>SOC2 Type II certified with end-to-end encryption and 99.99% uptime guarantee.</p>
+                <div style="margin-top: 20px; font-size: 24px; text-align: center;">🛡️ 🔒 ✅</div>
+            </div>
+            <div class="bento-item">
+                <div class="bento-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Optimized for Core Web Vitals. Average LCP under 1.2s, FID under 50ms.</p>
+                <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+                    <span style="background: var(--secondary); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; color: white;">LCP: 1.1s</span>
+                    <span style="background: var(--primary); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; color: white;">FID: 48ms</span>
+                </div>
+            </div>
+            <div class="bento-item bento-large">
+                <div class="bento-icon">🤖</div>
+                <h3>AI-Powered Insights</h3>
+                <p>Automated anomaly detection and predictive analytics to optimize your workflows.</p>
+                <div class="feature-demo-ai">
+                    <div style="text-align: center;">
+                        <div style="font-size: 16px; margin-bottom: 8px;">📈 Pattern Detection</div>
+                        <div style="font-size: 12px; color: rgba(15, 23, 42, 0.7);">Predicting trends 30 days ahead</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bento-item">
+                <div class="bento-icon">🔗</div>
+                <h3>API Integration</h3>
+                <p>Connect seamlessly with 200+ tools via REST API and webhooks.</p>
+                <div style="margin-top: 20px; font-size: 28px; text-align: center;">🔄 ↔️ 🌐</div>
+            </div>
+            <div class="bento-item">
+                <div class="bento-icon">🌐</div>
+                <h3>Multi-Team Collaboration</h3>
+                <p>Built-in workflows for team communication and project management.</p>
+                <div style="margin-top: 20px; display: flex; justify-content: center; gap: 8px;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--primary);"></div>
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--secondary);"></div>
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent); opacity: 0.6;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section class="interactive-demo">
+        <h2>See It In Action</h2>
+        <div class="demo-container">
+            <div class="demo-controls">
+                <button class="demo-btn active" data-demo="analytics">Analytics</button>
+                <button class="demo-btn" data-demo="workflow">Workflow</button>
+                <button class="demo-btn" data-demo="reporting">Reporting</button>
+            </div>
+            <div class="demo-content">
+                <div id="analytics" class="demo-panel active">
+                    <div class="demo-chart">
+                        <div class="chart-bar" style="height: 40%"></div>
+                        <div class="chart-bar" style="height: 60%"></div>
+                        <div class="chart-bar" style="height: 80%"></div>
+                        <div class="chart-bar" style="height: 50%"></div>
+                        <div class="chart-bar" style="height: 75%"></div>
+                    </div>
+                    <p>Real-time analytics update every second</p>
+                </div>
+                <div id="workflow" class="demo-panel">
+                    <div class="demo-workflow">
+                        <div class="workflow-step">① Client Onboards</div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">② Data Synced</div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">③ Report Generated</div>
+                    </div>
+                </div>
+                <div id="reporting" class="demo-panel">
+                    <div class="report-preview">
+                        <div class="report-section">Executive Summary</div>
+                        <div class="report-metric">Performance Score: 9.2/10</div>
+                        <div class="report-metric">Growth: ↑ 23% month-over-month</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Pricing Section -->
+    <section id="pricing" class="pricing">
+        <h2>Transparent Pricing for Every Size</h2>
+        <div class="pricing-toggle">
+            <span>Monthly</span>
+            <input type="checkbox" id="billingToggle" class="toggle-switch">
+            <span>Yearly (Save 20%)</span>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="price">
+                    <span class="currency">$</span>
+                    <span class="amount" data-monthly="99" data-yearly="948">99</span>
+                    <span class="period">/month</span>
+                </div>
+                <ul class="features-list">
+                    <li>✓ Up to 5 clients</li>
+                    <li>✓ Basic analytics</li>
+                    <li>✓ Email support</li>
+                    <li>✗ API access</li>
+                    <li>✗ Custom integrations</li>
+                </ul>
+                <button class="btn btn-secondary">Get Started</button>
+            </div>
+            <div class="pricing-card popular">
+                <span class="badge">Most Popular</span>
+                <h3>Professional</h3>
+                <div class="price">
+                    <span class="currency">$</span>
+                    <span class="amount" data-monthly="299" data-yearly="2872">299</span>
+                    <span class="period">/month</span>
+                </div>
+                <ul class="features-list">
+                    <li>✓ Unlimited clients</li>
+                    <li>✓ Advanced analytics</li>
+                    <li>✓ Priority support</li>
+                    <li>✓ API access</li>
+                    <li>✓ 5 custom integrations</li>
+                </ul>
+                <button class="btn btn-primary">Start Free Trial</button>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price">
+                    <span class="currency">Custom</span>
+                    <span class="amount">Pricing</span>
+                </div>
+                <ul class="features-list">
+                    <li>✓ Everything in Professional</li>
+                    <li>✓ Custom SLAs</li>
+                    <li>✓ Dedicated account manager</li>
+                    <li>✓ Unlimited integrations</li>
+                    <li>✓ On-premise deployment</li>
+                </ul>
+                <button class="btn btn-secondary">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Portal -->
+    <section id="docs" class="documentation">
+        <h2>Complete API Documentation</h2>
+        <div class="docs-container">
+            <div class="docs-sidebar">
+                <div class="search-box">
+                    <input type="text" placeholder="Search docs..." />
+                </div>
+                <nav class="docs-nav">
+                    <div class="doc-section">
+                        <h4>Getting Started</h4>
+                        <a href="#" class="doc-link">Introduction</a>
+                        <a href="#" class="doc-link">Authentication</a>
+                        <a href="#" class="doc-link">Rate Limits</a>
+                    </div>
+                    <div class="doc-section">
+                        <h4>API Reference</h4>
+                        <a href="#" class="doc-link">Analytics API</a>
+                        <a href="#" class="doc-link">Reporting API</a>
+                        <a href="#" class="doc-link">Webhooks</a>
+                    </div>
+                    <div class="doc-section">
+                        <h4>SDKs</h4>
+                        <a href="#" class="doc-link">JavaScript</a>
+                        <a href="#" class="doc-link">Python</a>
+                        <a href="#" class="doc-link">Ruby</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="docs-content">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>endpoint.js</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre><code>// Authentication
+const response = await fetch('https://api.techflow.io/v1/analytics', {
+  headers: {
+    'Authorization': 'Bearer your_api_key',
+    'Content-Type': 'application/json'
+  }
+});
+
+const data = await response.json();
+console.log(data.metrics);</code></pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>response.json</span>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                    <pre><code>{
+  "success": true,
+  "metrics": {
+    "pageViews": 15234,
+    "uniqueUsers": 3421,
+    "conversionRate": 4.2,
+    "avgSessionDuration": 342
+  },
+  "timestamp": "2026-04-08T14:22:00Z"
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Signals Section -->
+    <section class="trust-signals">
+        <h2>Built for Enterprise Trust</h2>
+        <div class="trust-grid">
+            <div class="trust-item">
+                <div class="security-badge">🔒 SOC2</div>
+                <p>Type II Certified for security and compliance</p>
+            </div>
+            <div class="trust-item">
+                <div class="security-badge">🌍 GDPR</div>
+                <p>Fully compliant with GDPR regulations</p>
+            </div>
+            <div class="trust-item">
+                <div class="security-badge">📊 ISO 27001</div>
+                <p>Information security management certified</p>
+            </div>
+            <div class="trust-item">
+                <div class="security-badge">🔐 End-to-End</div>
+                <p>Military-grade encryption for all data</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-video" style="background: linear-gradient(135deg, #635BFF 0%, #00E5E5 100%);">
+                    <div class="video-placeholder">
+                        <div style="font-size: 48px; margin-bottom: 10px;">▶️</div>
+                        <span>Watch Video (2:14)</span>
+                    </div>
+                </div>
+                <div class="testimonial-text">
+                    <p>"TechFlow transformed how we report to clients. The real-time dashboard saved us 10 hours per week."</p>
+                    <div class="testimonial-author">
+                        <strong>Sarah Chen</strong>
+                        <span>CEO, Digital Agency Pro</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-video" style="background: linear-gradient(135deg, #F43F5E 0%, #00E5E5 100%);">
+                    <div class="video-placeholder">
+                        <div style="font-size: 48px; margin-bottom: 10px;">▶️</div>
+                        <span>Watch Video (3:02)</span>
+                    </div>
+                </div>
+                <div class="testimonial-text">
+                    <p>"The security compliance features gave us peace of mind. Our enterprise clients were impressed."</p>
+                    <div class="testimonial-author">
+                        <strong>Marcus Johnson</strong>
+                        <span>CTO, Tech Solutions Inc</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-video" style="background: linear-gradient(135deg, #00E5E5 0%, #635BFF 100%);">
+                    <div class="video-placeholder">
+                        <div style="font-size: 48px; margin-bottom: 10px;">▶️</div>
+                        <span>Watch Video (2:45)</span>
+                    </div>
+                </div>
+                <div class="testimonial-text">
+                    <p>"Performance was our biggest concern. Their optimization literally doubled our conversion rate."</p>
+                    <div class="testimonial-author">
+                        <strong>Elena Rodriguez</strong>
+                        <span>Founder, Growth Agency Co</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2>Ready to Transform Your Agency?</h2>
+        <p>Join 500+ agencies that trust TechFlow for their client reporting and data management.</p>
+        <div class="cta-buttons">
+            <button class="btn btn-primary btn-large">Start Free Trial Now</button>
+            <button class="btn btn-secondary btn-large">Schedule a Demo</button>
+        </div>
+        <p class="cta-note">No credit card required. 14-day free trial.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">Status</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API Reference</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Compliance</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TechFlow. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
