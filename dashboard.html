@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — TechFlow</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ===== Dashboard Page Styles ===== */
+        .dashboard-layout {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            min-height: calc(100vh - 70px);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .plan-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .stat-card {
+            background: #0F1419;
+            border-color: #2D333B;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .stat-card .stat-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .stat-card .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-card .stat-title {
+            font-size: 14px;
+            color: rgba(15, 23, 42, 0.6);
+            font-weight: 500;
+        }
+
+        .dark-mode .stat-card .stat-title {
+            color: #B0B5C1;
+        }
+
+        /* Sections */
+        .dashboard-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .dark-mode .dashboard-section {
+            background: #0F1419;
+            border-color: #2D333B;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .section-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* Clients Table */
+        .clients-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .clients-table th,
+        .clients-table td {
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .clients-table th {
+            font-weight: 600;
+            color: rgba(15, 23, 42, 0.6);
+            border-bottom: 2px solid var(--border);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dark-mode .clients-table th {
+            color: #B0B5C1;
+        }
+
+        .clients-table td {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .clients-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .clients-table tr:hover td {
+            background: rgba(99, 91, 255, 0.03);
+        }
+
+        .dark-mode .clients-table tr:hover td {
+            background: rgba(139, 149, 248, 0.05);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-badge.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+        }
+
+        .status-badge.inactive {
+            background: rgba(244, 63, 94, 0.1);
+            color: #F43F5E;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 6px;
+        }
+
+        .action-btns button {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-size: 12px;
+            color: var(--text);
+            transition: all 0.2s ease;
+        }
+
+        .action-btns button:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .action-btns button.delete:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Add Client Form */
+        .add-client-form {
+            display: none;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            animation: subtleFadeIn 0.3s ease;
+        }
+
+        .dark-mode .add-client-form {
+            background: #020617;
+            border-color: #2D333B;
+        }
+
+        .add-client-form.visible {
+            display: block;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: rgba(15, 23, 42, 0.5);
+        }
+
+        .dark-mode .empty-state {
+            color: #B0B5C1;
+        }
+
+        .empty-state .empty-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        /* Table responsive */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header h1 {
+                font-size: 24px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo" style="text-decoration: none;">TechFlow</a>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard" style="color: var(--primary);">Dashboard</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
+                <div id="userMenu" class="user-menu">
+                    <span id="userName" style="font-weight: 600; font-size: 14px;"></span>
+                    <button class="btn btn-sm btn-logout" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-layout">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <div>
+                <h1>📊 Dashboard</h1>
+                <p style="color: rgba(15, 23, 42, 0.6); margin-top: 4px;" id="welcomeText">Welcome back!</p>
+            </div>
+            <div class="plan-badge" id="planBadge">Starter Plan</div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-value" id="totalClients">0</div>
+                <div class="stat-title">Total Clients</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-value" id="activeClients">0</div>
+                <div class="stat-title">Active Clients</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-value" id="totalPageViews">0</div>
+                <div class="stat-title">Total Page Views</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-value" id="avgConversion">0%</div>
+                <div class="stat-title">Avg Conversion Rate</div>
+            </div>
+        </div>
+
+        <!-- Client Management -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>👥 Client Management</h2>
+                <button class="btn btn-primary btn-sm" id="toggleAddClient">+ Add Client</button>
+            </div>
+
+            <!-- Add Client Form -->
+            <div class="add-client-form" id="addClientForm">
+                <form id="addClientFormEl">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="clientName">Name *</label>
+                            <input type="text" id="clientName" placeholder="Client name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="clientEmail">Email</label>
+                            <input type="email" id="clientEmail" placeholder="client@example.com" />
+                        </div>
+                        <div class="form-group">
+                            <label for="clientCompany">Company</label>
+                            <input type="text" id="clientCompany" placeholder="Company name" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="clientPhone">Phone</label>
+                            <input type="text" id="clientPhone" placeholder="+91 xxxxxxxxxx" />
+                        </div>
+                        <div class="form-group">
+                            <label for="clientNotes">Notes</label>
+                            <input type="text" id="clientNotes" placeholder="Any notes..." />
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" class="btn btn-primary btn-sm">Save Client</button>
+                        <button type="button" class="btn btn-secondary btn-sm" id="cancelAddClient">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Clients Table -->
+            <div class="table-wrapper">
+                <table class="clients-table" id="clientsTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientsTableBody">
+                        <tr>
+                            <td colspan="5">
+                                <div class="empty-state">
+                                    <div class="empty-icon">📋</div>
+                                    <p>No clients yet. Add your first client!</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Payment History -->
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>💳 Payment History</h2>
+            </div>
+            <div class="table-wrapper">
+                <table class="clients-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Plan</th>
+                            <th>Amount</th>
+                            <th>Cycle</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentsTableBody">
+                        <tr>
+                            <td colspan="5">
+                                <div class="empty-state">
+                                    <div class="empty-icon">💳</div>
+                                    <p>No payments yet.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // Dashboard JavaScript
+        // ============================================
+        const API_BASE = '/api';
+        const token = localStorage.getItem('techflow_token');
+        const user = JSON.parse(localStorage.getItem('techflow_user') || 'null');
+
+        // ===== Auth Guard =====
+        if (!token || !user) {
+            window.location.href = '/';
+        }
+
+        // ===== API Helper =====
+        async function apiFetch(endpoint, options = {}) {
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+                ...options.headers,
+            };
+            const res = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+            const data = await res.json();
+            if (!res.ok) {
+                if (res.status === 401) {
+                    localStorage.removeItem('techflow_token');
+                    localStorage.removeItem('techflow_user');
+                    window.location.href = '/';
+                    return;
+                }
+                throw { status: res.status, ...data };
+            }
+            return data;
+        }
+
+        // ===== Theme Toggle =====
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        const currentTheme = localStorage.getItem('theme') || 'light-mode';
+        htmlElement.classList.add(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark-mode')) {
+                htmlElement.classList.remove('dark-mode');
+                htmlElement.classList.add('light-mode');
+                localStorage.setItem('theme', 'light-mode');
+            } else {
+                htmlElement.classList.add('dark-mode');
+                htmlElement.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            }
+        });
+
+        // ===== Logout =====
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('techflow_token');
+            localStorage.removeItem('techflow_user');
+            window.location.href = '/';
+        });
+
+        // ===== Set User Info =====
+        document.getElementById('userName').textContent = user?.name || 'User';
+        document.getElementById('welcomeText').textContent = `Welcome back, ${user?.name || 'User'}!`;
+        document.getElementById('planBadge').textContent = `${(user?.plan || 'starter')} Plan`;
+
+        // ===== Notification =====
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'error'
+                ? 'linear-gradient(135deg, #DC2626, #F43F5E)'
+                : type === 'success'
+                    ? 'linear-gradient(135deg, #059669, #10B981)'
+                    : 'linear-gradient(135deg, #4F46E5, #EC4899)';
+
+            notification.style.cssText = `
+                position: fixed; top: 20px; right: 20px;
+                background: ${bgColor}; color: white;
+                padding: 15px 25px; border-radius: 8px;
+                font-weight: 600; font-size: 14px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                z-index: 10000; max-width: 400px;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100px)';
+                notification.style.transition = 'all 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // ===== Load Dashboard Stats =====
+        async function loadDashboard() {
+            try {
+                const data = await apiFetch('/dashboard/stats');
+                const d = data.dashboard;
+
+                document.getElementById('totalClients').textContent = d.clients.total;
+                document.getElementById('activeClients').textContent = d.clients.active;
+                document.getElementById('totalPageViews').textContent =
+                    d.metrics.totalPageViews.toLocaleString();
+                document.getElementById('avgConversion').textContent =
+                    d.metrics.avgConversionRate + '%';
+                document.getElementById('planBadge').textContent =
+                    `${d.user.plan.charAt(0).toUpperCase() + d.user.plan.slice(1)} Plan`;
+            } catch (err) {
+                console.error('Failed to load dashboard:', err);
+            }
+        }
+
+        // ===== Load Clients =====
+        async function loadClients() {
+            try {
+                const data = await apiFetch('/clients');
+                const tbody = document.getElementById('clientsTableBody');
+
+                if (!data.clients || data.clients.length === 0) {
+                    tbody.innerHTML = `
+                        <tr><td colspan="5">
+                            <div class="empty-state">
+                                <div class="empty-icon">📋</div>
+                                <p>No clients yet. Add your first client!</p>
+                            </div>
+                        </td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = data.clients.map(client => `
+                    <tr>
+                        <td><strong>${escHtml(client.name)}</strong></td>
+                        <td>${escHtml(client.email || '—')}</td>
+                        <td>${escHtml(client.company || '—')}</td>
+                        <td>
+                            <span class="status-badge ${client.status}">
+                                ${client.status === 'active' ? '● Active' : '○ Inactive'}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="action-btns">
+                                <button onclick="toggleClientStatus('${client.id}', '${client.status}')">
+                                    ${client.status === 'active' ? 'Deactivate' : 'Activate'}
+                                </button>
+                                <button class="delete" onclick="deleteClient('${client.id}')">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                console.error('Failed to load clients:', err);
+            }
+        }
+
+        // ===== Load Payments =====
+        async function loadPayments() {
+            try {
+                const data = await apiFetch('/payments/history');
+                const tbody = document.getElementById('paymentsTableBody');
+
+                if (!data.payments || data.payments.length === 0) {
+                    tbody.innerHTML = `
+                        <tr><td colspan="5">
+                            <div class="empty-state">
+                                <div class="empty-icon">💳</div>
+                                <p>No payments yet.</p>
+                            </div>
+                        </td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = data.payments.map(p => `
+                    <tr>
+                        <td>${new Date(p.created_at).toLocaleDateString()}</td>
+                        <td>${p.plan.charAt(0).toUpperCase() + p.plan.slice(1)}</td>
+                        <td>₹${(p.amount / 100).toLocaleString()}</td>
+                        <td>${p.billing_cycle}</td>
+                        <td>
+                            <span class="status-badge ${p.status === 'paid' ? 'active' : 'inactive'}">
+                                ${p.status === 'paid' ? '✓ Paid' : p.status}
+                            </span>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                console.error('Failed to load payments:', err);
+            }
+        }
+
+        // ===== Add Client =====
+        const toggleBtn = document.getElementById('toggleAddClient');
+        const addForm = document.getElementById('addClientForm');
+        const cancelBtn = document.getElementById('cancelAddClient');
+
+        toggleBtn.addEventListener('click', () => {
+            addForm.classList.toggle('visible');
+        });
+        cancelBtn.addEventListener('click', () => {
+            addForm.classList.remove('visible');
+        });
+
+        document.getElementById('addClientFormEl').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                const client = {
+                    name: document.getElementById('clientName').value,
+                    email: document.getElementById('clientEmail').value || undefined,
+                    company: document.getElementById('clientCompany').value || undefined,
+                    phone: document.getElementById('clientPhone').value || undefined,
+                    notes: document.getElementById('clientNotes').value || undefined,
+                };
+                await apiFetch('/clients', {
+                    method: 'POST',
+                    body: JSON.stringify(client),
+                });
+                showNotification('Client added successfully!', 'success');
+                e.target.reset();
+                addForm.classList.remove('visible');
+                loadClients();
+                loadDashboard();
+            } catch (err) {
+                showNotification(err.message || 'Failed to add client.', 'error');
+            }
+        });
+
+        // ===== Toggle Client Status =====
+        async function toggleClientStatus(id, currentStatus) {
+            try {
+                const newStatus = currentStatus === 'active' ? 'inactive' : 'active';
+                await apiFetch(`/clients/${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ status: newStatus }),
+                });
+                showNotification(`Client ${newStatus === 'active' ? 'activated' : 'deactivated'}.`, 'success');
+                loadClients();
+                loadDashboard();
+            } catch (err) {
+                showNotification('Failed to update client.', 'error');
+            }
+        }
+
+        // ===== Delete Client =====
+        async function deleteClient(id) {
+            if (!confirm('Are you sure you want to delete this client?')) return;
+            try {
+                await apiFetch(`/clients/${id}`, { method: 'DELETE' });
+                showNotification('Client deleted.', 'success');
+                loadClients();
+                loadDashboard();
+            } catch (err) {
+                showNotification('Failed to delete client.', 'error');
+            }
+        }
+
+        // ===== HTML Escape Helper =====
+        function escHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ===== Notification Keyframes =====
+        const notifStyle = document.createElement('style');
+        notifStyle.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(notifStyle);
+
+        // ===== Initialize =====
+        loadDashboard();
+        loadClients();
+        loadPayments();
+    </script>
+</body>
+</html>
